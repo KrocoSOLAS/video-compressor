@@ -1,10 +1,10 @@
 # Dependencies
 node_modules/
 
-# Build output / packaged app (regenerated with `npm run dist`)
+# Build output / packaged app (regenerated with `npm run pack`)
 dist/
 out/
-"Video Compressor/"
+Video Compressor/
 *.zip
 
 # Test artifacts

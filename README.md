@@ -2,6 +2,8 @@
 
 A desktop video compressor for Windows. Drag in videos, pick a quality preset or a target file size, and it batch-compresses them with FFmpeg — no separate FFmpeg install required (the binary is bundled).
 
+![Video Compressor screenshot](assets/screenshot.png)
+
 ## ⬇️ Download (Windows)
 
 **[Download the latest release →](https://github.com/KrocoSOLAS/video-compressor/releases/latest)**
@@ -34,11 +36,28 @@ npm install     # downloads Electron + the FFmpeg/FFprobe binaries
 npm start
 ```
 
-## Building a Windows installer
+## Building the app
 
 ```bash
-npm run dist    # produces an NSIS installer in dist/
+npm run pack    # builds dist/win-unpacked/ (the portable app, FFmpeg bundled)
 ```
+
+> On Windows, `electron-builder` prints a harmless `winCodeSign` symlink error
+> (those files are only for *macOS* code-signing). The `win-unpacked` folder is
+> still produced correctly. To build the single-file NSIS installer with
+> `npm run dist`, enable **Developer Mode** (Settings → For developers) or run as admin.
+
+## Cutting a release
+
+One command builds the app, zips it, and publishes a GitHub Release with the zip
+attached (requires the [GitHub CLI](https://cli.github.com/), authenticated):
+
+```bash
+npm run release -- -Version v1.1.0
+```
+
+This bumps `package.json`, commits & pushes the bump, builds `win-unpacked`,
+zips it to `Video Compressor.zip`, and creates the `v1.1.0` release.
 
 ## How it works
 

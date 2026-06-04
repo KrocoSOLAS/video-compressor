@@ -7,7 +7,9 @@
   "license": "MIT",
   "scripts": {
     "start": "electron .",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "pack": "electron-builder --dir",
+    "release": "powershell -NoProfile -ExecutionPolicy Bypass -File build-release.ps1"
   },
   "dependencies": {
     "ffmpeg-static": "^5.2.0",
