@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Build output / packaged app (regenerated with `npm run dist`)
+dist/
+out/
+"Video Compressor/"
+*.zip
+
+# Test artifacts
+test_*.mp4
+test_*.webm
+sample_clip*.mp4
+_screenshot.png
+_cdp.js
+_inject.js
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini

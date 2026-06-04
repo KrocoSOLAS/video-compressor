@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;" />
+  <title>Video Compressor</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="logo">▶</span>
+        <h1>Video Compressor</h1>
+      </div>
+      <div class="topbar-actions">
+        <button id="addBtn" class="btn btn-ghost">+ Add videos</button>
+        <button id="clearBtn" class="btn btn-ghost">Clear</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <!-- Queue / drop zone -->
+      <section class="queue-pane">
+        <div id="dropZone" class="dropzone">
+          <div class="dropzone-inner">
+            <div class="drop-icon">⬇</div>
+            <p class="drop-title">Drag &amp; drop videos here</p>
+            <p class="drop-sub">or <button id="browseLink" class="linklike">browse files</button></p>
+          </div>
+        </div>
+        <ul id="queueList" class="queue-list"></ul>
+      </section>
+
+      <!-- Settings -->
+      <aside class="settings-pane">
+        <h2 class="settings-title">Compression settings</h2>
+
+        <div class="field">
+          <label class="field-label">Mode</label>
+          <div class="seg" id="modeSeg">
+            <button class="seg-btn active" data-mode="quality">Quality</button>
+            <button class="seg-btn" data-mode="targetSize">Target size</button>
+          </div>
+        </div>
+
+        <div class="field" id="qualityField">
+          <label class="field-label">Quality preset</label>
+          <div class="seg seg-3" id="qualitySeg">
+            <button class="seg-btn" data-quality="low">Low<small>smallest</small></button>
+            <button class="seg-btn active" data-quality="medium">Medium<small>balanced</small></button>
+            <button class="seg-btn" data-quality="high">High<small>best</small></button>
+          </div>
+        </div>
+
+        <div class="field hidden" id="targetField">
+          <label class="field-label" for="targetMB">Target size (MB)</label>
+          <input type="number" id="targetMB" class="text-input" value="25" min="1" step="1" />
+          <p class="hint">Applied per video. Bitrate is calculated from each video's length.</p>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="resolution">Resolution</label>
+          <select id="resolution" class="select">
+            <option value="original">Keep original</option>
+            <option value="2160">4K — 2160p</option>
+            <option value="1440">2K — 1440p</option>
+            <option value="1080">1080p (Full HD)</option>
+            <option value="720">720p (HD)</option>
+            <option value="480">480p</option>
+            <option value="360">360p</option>
+            <option value="240">240p</option>
+          </select>
+          <p class="hint">Won't upscale — a value larger than the source keeps the source size.</p>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="fps">Frame rate</label>
+          <select id="fps" class="select">
+            <option value="original">Keep original</option>
+            <option value="60">60 fps</option>
+            <option value="30">30 fps</option>
+            <option value="24">24 fps (cinematic)</option>
+            <option value="15">15 fps</option>
+          </select>
+          <p class="hint">Caps the output frame rate (never above the source). In Quality mode this mostly affects smoothness, not file size; for big size cuts, lower the resolution or use Target size.</p>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="format">Output format</label>
+          <select id="format" class="select">
+            <option value="mp4">MP4</option>
+            <option value="mkv">MKV</option>
+            <option value="webm">WebM</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="codec">Codec</label>
+          <select id="codec" class="select">
+            <option value="h264">H.264 (compatible)</option>
+            <option value="h265">H.265 / HEVC (smaller)</option>
+            <option value="vp9">VP9 (WebM)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="field-label">Output folder</label>
+          <div class="output-row">
+            <span id="outputDirLabel" class="output-label">Same as source</span>
+            <button id="outputBtn" class="btn btn-ghost btn-sm">Change</button>
+          </div>
+        </div>
+
+        <div id="estimateTotal" class="estimate-total hidden"></div>
+
+        <button id="compressBtn" class="btn btn-primary btn-block" disabled>Compress</button>
+        <button id="cancelAllBtn" class="btn btn-danger btn-block hidden">Cancel</button>
+      </aside>
+    </main>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
