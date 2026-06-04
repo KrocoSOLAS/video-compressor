@@ -2,6 +2,17 @@
 
 A desktop video compressor for Windows. Drag in videos, pick a quality preset or a target file size, and it batch-compresses them with FFmpeg — no separate FFmpeg install required (the binary is bundled).
 
+## ⬇️ Download (Windows)
+
+**[Download the latest release →](https://github.com/KrocoSOLAS/video-compressor/releases/latest)**
+
+1. Download `Video Compressor.zip` from the release.
+2. **Right-click → Extract All** (don't run it from inside the zip).
+3. Open the folder → double-click **`Video Compressor.exe`**.
+4. First launch shows a *"Windows protected your PC"* notice (the app isn't code-signed) → **More info → Run anyway**.
+
+Nothing else to install — FFmpeg is bundled. Windows 64-bit.
+
 ## Features
 
 - **Drag & drop** (or browse) — queue as many videos as you like.
